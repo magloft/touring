@@ -4,9 +4,11 @@
 
 ## What it is
 
+![logo](docs/assets/touring.svg "TouringJS")
+
 touring is a javascript/preact library that allows you to generate both beautiful and powerful product tours with ease.
 
-See the [Quick start](quickstart.md) guide for more details.
+Find more details in the [Documentation](https://magloft.github.io/touring)
 
 ## Features
 
