@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
     devServer: { contentBase: './' },
     entry: {
       touring: './src/index.tsx',
-      index: './docs/index.js'
+      index: './docs/assets/index.js'
     },
     output: {
       path: path.resolve(__dirname, './'),
@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
       new HtmlWebpackPlugin({
         title: 'touring | Interactive Product Tours',
-        template: 'docs/index.ejs',
+        template: 'docs/assets/index.ejs',
         filename: 'index.html',
         meta: {
           viewport: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
