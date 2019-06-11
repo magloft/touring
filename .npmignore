@@ -1,9 +1,12 @@
-docs/
 webpack.config.js
 .gitignore
 .npmignore
+
+docs/
 index.html
-webpack.config.js
+index.css
+index.js
+
 tsconfig.json
 tslint.json
 yarn-error.log
