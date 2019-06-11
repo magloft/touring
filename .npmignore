@@ -1,0 +1,10 @@
+docs/
+webpack.config.js
+.gitignore
+.npmignore
+index.html
+webpack.config.js
+tsconfig.json
+tslint.json
+yarn-error.log
+yarn.lock
