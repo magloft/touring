@@ -5,12 +5,12 @@
 - Overview
 
   - [Introduction](/)
-  - [Quickstart](QUICKSTART.md)
-  - [Configuration](CONFIGURATION.md)
-  - [Examples](EXAMPLES.md)
+  - [Quickstart](docs/QUICKSTART.md)
+  - [Configuration](docs/CONFIGURATION.md)
+  - [Examples](docs/EXAMPLES.md)
 
 - Documentation
 
-  - [Tour](TOUR.md)
-  - [Steps](STEPS.md)
-  - [Conditions](CONDITIONS.md)
+  - [Tour](docs/TOUR.md)
+  - [Steps](docs/STEPS.md)
+  - [Conditions](docs/CONDITIONS.md)

@@ -1,13 +1,11 @@
 window.$docsify = {
   name: '@magloft/touring',
   repo: 'https://github.com/magloft/touring',
-  logo: 'assets/touring.svg',
+  logo: 'docs/assets/touring.svg',
   themeColor: '#178BF5',
-  homepage: '../README.md',
-  loadSidebar: 'SIDEBAR.md',
-  executeScript: true,
-  // routerMode: 'history',
-  basePath: '/docs/'
+  homepage: 'README.md',
+  loadSidebar: 'docs/SIDEBAR.md',
+  executeScript: true
 }
 
 window.startTour = function() {
