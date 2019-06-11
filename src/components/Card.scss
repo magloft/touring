@@ -34,19 +34,48 @@
     }
   }
 
-  .trng-card-body {
-    padding: 16px 12px;
+  .trng-card-item-image {
+    margin-left: -4px;
+    margin-right: -4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #F5F5F5;
 
-    pre {
-      background-color: #FAFAFA;
-      padding: 6px 8px;
-      margin: 8px;
-      border: 1px solid #EEE;
-      font-size: 13px;
+    img {
+      width: 100%;
+      display: block;
     }
   }
+  
+  .trng-card-item-paragraph {
+    padding: 16px 12px;
+  }
 
-  .trng-card-footer {
+  .trng-card-item-code {
+    background-color: #FAFAFA;
+    padding: 6px 8px;
+    margin: 8px;
+    border: 1px solid #EEE;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: pre;
+  }
+
+  .trng-card-item-hint {
+    color: #178bf4;
+    font-weight: 600;
+    padding: 0px 12px 0px 32px;
+    line-height: 36px;
+    border-top: 1px solid #F5F5F5;
+    background-image: url('../icons/hint.svg');
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 10px center;
+  }
+
+  .trng-card-item-button {
     padding: 8px;
     min-height: 48px;
     background-color: #FAFAFA;
@@ -55,14 +84,14 @@
     justify-content: flex-end;
     align-content: center;
 
-    .trng-card-footer-button {
+    .trng-card-item-button-btn {
       display: block;
       padding: 4px 12px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       background-color: #1a6ace;
       line-height: 22px;
       border-radius: 3px;
-      color: #FFF;
+      color: #ffffff;
       cursor: pointer;
       font-weight: 500;
 
@@ -128,11 +157,11 @@
 }
 
 .trng-card-bounce {
-  animation:trng-card-keyframes-bounce .35 s ease-out;
+  animation: trng-card-keyframes-bounce .35s ease-out;
 }
 
 @keyframes trng-card-keyframes-bounce {
-  0% , to { transform: rotate(0) };
+  0%, to { transform: rotate(0) };
   10% { transform: scale(1.1) };
   40% { transform: rotate(2deg) translateX(0) };
   80% { transform: rotate(-1deg) translateX(0) };

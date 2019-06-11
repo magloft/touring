@@ -1,27 +1,29 @@
 import { get } from 'object-path'
 import Condition from './Condition'
 import Tour from '../components/Tour'
+import Item from './Item'
 
 export default class Step {
   readonly tour: Tour
   readonly id: string
   readonly icon: string
   readonly title: string
-  readonly message: string
   readonly selector: string
-  conditions: Condition[] = []
   readonly autoadvance: boolean = false
   readonly listen: string[] = []
   readonly trigger: string[] = []
-  readonly buttonLabel: string = 'Continue'
-  readonly buttonColor: string = '#178bf5'
-  readonly positions: string[] = ['right', 'left', 'bottom', 'top']
+  readonly positions: string[] = ['left', 'right', 'bottom', 'top']
+  conditions: Condition[] = []
+  items: Item[] = []
   valid: boolean = false
 
   constructor(tour, config?:Partial<Step>) {
     this.tour = tour
     if (config.conditions) {
       config.conditions = config.conditions.map(([property, comparator, value]: any) => new Condition(property, comparator, value))
+    }
+    if (config.items) {
+      config.items = config.items.map((item) => new Item(item))
     }
     Object.assign(this, config)
     this.onChange = this.onChange.bind(this)
@@ -70,10 +72,13 @@ export default class Step {
     return this.valid
   }
 
-  onChange() {
+  onChange(event) {
+    event.preventDefault()
+    event.stopImmediatePropagation()
     const { step } = this.tour.state
     if (this.valid && step === this) {
       this.tour.continue()
     }
+    return false
   }
 }

@@ -21,7 +21,7 @@ interface TourState {
 }
 
 export default class Tour extends Component<TourProps, TourState> {
-  private card: Ref<Card>
+  private card: Card
 
   static defaultProps = {
     scope: {},
@@ -77,9 +77,8 @@ export default class Tour extends Component<TourProps, TourState> {
   }
 
   onBackdropClick(event) {
-    if (event.target.classList.contains('trng-backdrop') && this.card && !this.state.step.valid) {
-      // this.card.bounce()
-      console.log('@TODO')
+    if (event.target.classList.contains('trng-backdrop') && this.card) {
+      this.card.bounce()
     }
   }
 
@@ -91,12 +90,7 @@ export default class Tour extends Component<TourProps, TourState> {
           {(rect) => (
             <span>
               <Backdrop active={active} rect={rect} onClick={this.onBackdropClick} />
-              <Card
-                active={active && step.active && (!step.selector || (rect.width > 0 && rect.height > 0))}
-                ref={(card) => this.card = card}
-                step={step}
-                rect={rect}
-                onContinue={this.continue} />
+              <Card active={active && step.active && (!step.selector || (rect.width > 0 && rect.height > 0))} ref={(card) => this.card = card} step={step} rect={rect}/>
             </span>
           )}
         </PositionObserver>

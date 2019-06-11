@@ -1,4 +1,4 @@
-import { h, Component, Ref } from 'preact'
+import { h, Component } from 'preact'
 import cx from 'classnames'
 import AnimateOnChange from './AnimateOnChange'
 import './Card.scss'
@@ -9,12 +9,12 @@ const DIRECTION_ARROW_MAP = {
   left: 'right',
   right: 'left',
   top: 'bottom',
-  bottom: 'top'
+  bottom: 'top',
+  center: 'none'
 }
 
 export interface CardProps {
   step: Step
-  onContinue?: Function
   active?: boolean
   rect?: DOMRect
 }
@@ -35,16 +35,8 @@ export default class Card extends Component<CardProps, CardState> {
 
   constructor(props) {
     super(props)
-    this.onClick = this.onClick.bind(this)
     this.onAnimationEnd = this.onAnimationEnd.bind(this)
     this.refCallback = this.refCallback.bind(this)
-  }
-
-  onClick(event) {
-    event.preventDefault()
-    if (this.props.step.valid && this.props.onContinue) {
-      this.props.onContinue()
-    }
   }
 
   getLayout(targetRect, element) {
@@ -91,8 +83,10 @@ export default class Card extends Component<CardProps, CardState> {
     }
   }
 
-  render({ step, active, rect }, { animate }) {
+  render({ step, active }: CardProps, { animate }: CardState) {
+    const { items } = step
     const iconStyle = { backgroundImage: `url(${step.icon})` }
+
     return (
       <AnimateOnChange
         ref={this.refCallback}
@@ -100,23 +94,12 @@ export default class Card extends Component<CardProps, CardState> {
         animationClassName='trng-card-bounce'
         animate={animate}
         onAnimationEnd={this.onAnimationEnd}>
+        <div ref={(arrow) => { this.arrow = arrow }} class={cx('trng-card-arrow')} />
         <div class='trng-card-header'>
           <div class='trng-card-header-title'>{step.title}</div>
           <div class='trng-card-header-icon' style={iconStyle} />
         </div>
-        <div class='trng-card-body'>
-          <div class='trng-card-body-message' dangerouslySetInnerHTML={{ __html: step.message }} />
-        </div>
-        {step.buttonLabel && (
-          <div class='trng-card-footer'>
-            <a
-              disabled={!step.valid}
-              class='trng-card-footer-button'
-              onClick={this.onClick}
-              style={{ backgroundColor: step.buttonColor }}>{step.buttonLabel}</a>
-          </div>
-        )}
-        <div ref={(arrow) => { this.arrow = arrow }} class={cx('trng-card-arrow')} />
+        {items.map(item => item.render(step))}
       </AnimateOnChange>
     )
   }
