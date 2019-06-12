@@ -6,6 +6,7 @@ import ItemCode from '../components/items/ItemCode'
 import ItemHint from '../components/items/ItemHint'
 import ItemImage from '../components/items/ItemImage'
 import ItemEmbed from '../components/items/ItemEmbed'
+import ItemLink from '../components/items/ItemLink'
 
 const ITEM_MAP = {
   paragraph: ItemParagraph,
@@ -13,7 +14,8 @@ const ITEM_MAP = {
   code: ItemCode,
   hint: ItemHint,
   image: ItemImage,
-  embed: ItemEmbed
+  embed: ItemEmbed,
+  link: ItemLink
 }
 
 export default class Item {

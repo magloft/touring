@@ -140,12 +140,30 @@
     color: #178bf4;
     font-weight: 600;
     padding: 6px 12px 6px 32px;
-    border-top: 1px solid #F5F5F5;
+    box-shadow: 0px -1px 0px #F5F5F5, 0px -1px 0px #F5F5F5 inset;
     background-image: url('./icons/hint.svg');
     background-repeat: no-repeat;
     background-size: 18px;
     background-position: 10px center;
   }
+
+  .trng-card-item-link {
+    color: #178bf4;
+    padding: 6px 12px 6px 32px;
+    border: 1px solid #EEE;
+    background-image: url('./icons/link.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 10px center;
+    display: block;
+    margin: 8px 4px;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+    }
+}
 
   .trng-card-item-button {
     padding: 8px;
