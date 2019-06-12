@@ -1,7 +1,7 @@
 import touring from '../../src/index'
 import '../shared/examples.css'
 
-angular.module('form', []).controller('FormController', function($scope, $timeout) {
+angular.module('form', []).controller('FormController', ['$scope', '$timeout', function($scope, $timeout) {
   $scope.submitted = false
   $scope.loading = false
   $scope.onSubmit = function($event) {
@@ -17,7 +17,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
     context: $scope,
     steps: [{
       id: 'intro',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Contact Form',
       items: [
         { type: 'paragraph', value: 'Send us a message!' },
@@ -27,7 +27,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       listen: ['click']
     }, {
       id: 'name',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Your name',
       items: [
         { type: 'paragraph', value: 'Let us know your name!' },
@@ -39,7 +39,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       trigger: ['focus']
     }, {
       id: 'email',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Your email',
       items: [
         { type: 'paragraph', value: 'Let us know your email!' },
@@ -51,7 +51,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       trigger: ['focus']
     }, {
       id: 'phone',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Your phone number',
       items: [
         { type: 'paragraph', value: 'Let us know your phone number!' },
@@ -63,7 +63,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       trigger: ['focus']
     }, {
       id: 'website',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Your website',
       items: [
         { type: 'paragraph', value: 'Let us know your website!' },
@@ -75,7 +75,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       trigger: ['focus']
     }, {
       id: 'message',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Your message',
       items: [
         { type: 'paragraph', value: 'Let us know your message!' },
@@ -87,7 +87,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       trigger: ['focus']
     }, {
       id: 'submit',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Submit form',
       items: [
         { type: 'paragraph', value: 'Awesome, we now have all information we need to submit the form!' },
@@ -98,7 +98,7 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
       autoadvance: true
     }, {
       id: 'success',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'All done!',
       items: [
         { type: 'paragraph', value: 'Thanks for sending us your message!' },
@@ -107,4 +107,4 @@ angular.module('form', []).controller('FormController', function($scope, $timeou
     }]
   })
   tour.start()
-})
+}])

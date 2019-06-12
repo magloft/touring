@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', function() {
   const tour = touring({
     steps: [{
       id: 'code',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'FEEDBACK',
       items: [
         { type: 'paragraph', value: 'Please let us know what you think of touring:' },
@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', function() {
       ]
     }, {
       id: 'success',
-      icon: '/docs/assets/feature.svg',
+      icon: '../../docs/assets/feature.svg',
       title: 'Thanks!',
       items: [
         { type: 'paragraph', value: 'Thank you for submitting your feedback!' },
