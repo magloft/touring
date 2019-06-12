@@ -10,8 +10,9 @@
 
 - Examples
 
-  - [Observer](docs/examples/OBSERVER.md)
-  - [Angular.js](docs/examples/ANGULARJS.md)
+  - [Observer](docs/EXAMPLES/OBSERVER.md)
+  - [Angular.js](docs/EXAMPLES/ANGULARJS.md)
+  - [Item Types](docs/EXAMPLES/ITEMTYPES.md)
 
 - Documentation
 

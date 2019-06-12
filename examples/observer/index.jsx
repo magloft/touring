@@ -1,3 +1,6 @@
+import touring from '../../src/index'
+import '../shared/examples.css'
+
 window.addEventListener('DOMContentLoaded', function() {
   const tour = touring({
     steps: [{

@@ -1,3 +1,6 @@
+import touring from '../../src/index'
+import '../shared/examples.css'
+
 angular.module('form', []).controller('FormController', function($scope, $timeout) {
   $scope.submitted = false
   $scope.loading = false

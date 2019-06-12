@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 .trng-tour {
   position: fixed;
   top: 0;
@@ -5,6 +9,8 @@
   bottom: 0;
   right: 0;
   pointer-events: none;
+  font-family: "Helvetica Neue", Helvetica;
+  z-index: 2147483646;
 }
 
 .trng-backdrop {
@@ -169,7 +175,6 @@
 
   .trng-card-item-button {
     padding: 8px;
-    min-height: 48px;
     background-color: #FAFAFA;
     display: flex;
     flex-direction: row;

@@ -58,8 +58,9 @@ export default class Backdrop extends Component<BackdropProps> {
   getClipInfo() {
     const { x, y, width, height } = this.props.rect
     const valid = width !== 0 || height !== 0
-    const bodyWidth = document.body.offsetWidth
-    const bodyHeight = document.body.offsetHeight
+    const containerRect = this.base ? this.base.getBoundingClientRect() : document.body.getBoundingClientRect()
+    const bodyWidth = containerRect.width
+    const bodyHeight = containerRect.height
     const points = valid ? [
       [x, y + height + CLIP_SPACING],
       [x - CLIP_SPACING, y + height],

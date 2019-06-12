@@ -12,7 +12,10 @@ module.exports = (env, argv) => {
     devServer: { contentBase: './' },
     entry: {
       'dist/touring': './src/touring.js',
-      'dist/index': './docs/assets/index.js'
+      'dist/index': './docs/assets/index.js',
+      'examples/itemtypes/index': './examples/itemtypes/index.jsx',
+      'examples/angularjs/index': './examples/angularjs/index.jsx',
+      'examples/observer/index': './examples/observer/index.jsx'
     },
     output: {
       path: path.resolve(__dirname, './'),
@@ -21,9 +24,13 @@ module.exports = (env, argv) => {
       libraryTarget: 'umd',
       filename: '[name].js'
     },
-    resolve: { extensions: ['.js', '.ts', '.tsx'] },
+    resolve: { extensions: ['.js', '.ts', '.tsx', '.jsx'] },
     module: {
       rules: [
+        { test: /\.jsx$/, use: { loader: 'babel-loader', options: {
+          presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-transform-runtime', ['@babel/plugin-transform-react-jsx', { pragma: 'h' }]]
+        } } },
         { test: /\.tsx?$/, use: { loader: 'ts-loader' } },
         { test: /\.scss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
         { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
@@ -39,7 +46,8 @@ module.exports = (env, argv) => {
         meta: {
           viewport: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
           description: 'touring is a javascript/preact library that allows you to generate both beautiful and powerful product tours with ease.'
-        }
+        },
+        chunks: ['dist/touring', 'dist/index']
       })
     ],
     optimization: {

@@ -3,6 +3,7 @@ webpack.config.js
 .npmignore
 
 docs/
+examples/
 index.html
 dist/index.css
 dist/index.js

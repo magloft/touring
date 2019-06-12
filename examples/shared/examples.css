@@ -1,14 +1,7 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 html, body {
@@ -17,8 +10,7 @@ html, body {
 }
 
 body {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-weight: 100;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   color: #777;
@@ -28,6 +20,11 @@ body {
   justify-content: center;
   background: #178BF5;
   padding: 32px;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
 }
 
 #contact {
@@ -35,6 +32,7 @@ body {
   max-width: calc(100vw - 32px);
   background: #f9f9f9;
   padding: 25px;
+  margin: 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 #contact input[type=text], #contact input[type=email], #contact input[type=tel], #contact input[type=url], #contact textarea, #contact button[type=submit] {

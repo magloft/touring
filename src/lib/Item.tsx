@@ -1,22 +1,6 @@
 import { h } from 'preact'
 import Step from './Step'
-import ItemParagraph from '../components/items/ItemParagraph'
-import ItemButton from '../components/items/ItemButton'
-import ItemCode from '../components/items/ItemCode'
-import ItemHint from '../components/items/ItemHint'
-import ItemImage from '../components/items/ItemImage'
-import ItemEmbed from '../components/items/ItemEmbed'
-import ItemLink from '../components/items/ItemLink'
-
-const ITEM_MAP = {
-  paragraph: ItemParagraph,
-  button: ItemButton,
-  code: ItemCode,
-  hint: ItemHint,
-  image: ItemImage,
-  embed: ItemEmbed,
-  link: ItemLink
-}
+import ItemTypes from './ItemTypes'
 
 export default class Item {
   readonly type: string
@@ -28,8 +12,8 @@ export default class Item {
   }
 
   render(step: Step, onLayout: Function) {
-    const Item = ITEM_MAP[this.type]
+    const ItemType = ItemTypes[this.type]
     if (Item == null) { return null }
-    return (<Item step={step} type={this.type} value={this.value} options={this.options} onLayout={onLayout} />)
+    return (<ItemType step={step} type={this.type} value={this.value} options={this.options} onLayout={onLayout} />)
   }
 }

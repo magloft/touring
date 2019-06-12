@@ -74,7 +74,9 @@ export default class Card extends Component<CardProps, CardState> {
     const { step, rect } = this.props
     const { base } = this.element as any
     if (!base || !this.arrow) { return }
-    const layout = calculateLayout(step.positions, rect, base.getBoundingClientRect())
+    const { tour } = this.props.step
+    const containerRect = tour.base.getBoundingClientRect()
+    const layout = calculateLayout(step.positions,containerRect, rect, base.getBoundingClientRect())
     for (const [key, value] of Object.entries(this.getStyle(layout))) {
       base.style[key] = value
     }

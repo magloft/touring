@@ -1,0 +1,41 @@
+.trng-card-item-feedback {
+  background-color: #FAFAFA;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 4px;
+
+  .trng-card-item-feedback-item {
+    display: block;
+    flex: 1;
+    background-size: 48px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 64px;
+    margin: 4px;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.5;
+    transition: margin-top 250ms, opacity 250ms, background-size 250ms;
+    
+    &:hover {
+      margin-top: 4px;
+      opacity: 1;
+      background-size: 64px;
+    }
+
+    &[rating=low] { background-image: url('../shared/low.svg'); }
+    &[rating=medium] { background-image: url('../shared/medium.svg'); }
+    &[rating=high] { background-image: url('../shared/high.svg'); }
+  }
+}
+
+.trng-card-item-feedback-submitted {
+  color: #178bf4;
+  font-weight: 600;
+  padding: 6px 12px;
+  text-align: center;
+  box-shadow: 0px -1px 0px #F5F5F5, 0px -1px 0px #F5F5F5 inset;
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: 10px center;
+}
