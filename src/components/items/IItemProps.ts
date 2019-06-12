@@ -5,4 +5,5 @@ export interface IItemProps {
   type: string
   value: string
   options?: any
+  onLayout?: Function
 }
