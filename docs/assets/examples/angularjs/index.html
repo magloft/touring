@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>touring - AngularJS Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../../../../dist/touring.css">
+  </head>
+  <body>
+    <div class="example" ng-app="form">
+      <div class="container">
+        <form name="form" id="contact" method="post" ng-controller="FormController" ng-submit="form.$valid && onSubmit($event)">
+          <h3>Contact Form</h3>
+          <h4>Fill the form to get in touch with us!</h4>
+          <div class="loading" ng-show="loading">Loading ...</div>
+          <div ng-show="!loading">
+            <fieldset>
+              <input name="name" ng-model="name" placeholder="Your name" type="text" tabindex="1" required minlength="3" autofocus>
+            </fieldset>
+            <fieldset>
+              <input name="email" ng-model="email" placeholder="Your Email Address" type="email" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+              <input name="phone" ng-model="phone" placeholder="Your Phone Number (optional)" type="tel" tabindex="3">
+            </fieldset>
+            <fieldset>
+              <input name="website" ng-model="website" placeholder="Your Web Site (optional)" type="url" tabindex="4">
+            </fieldset>
+            <fieldset>
+              <textarea name="message" ng-model="message" placeholder="Type your message here...." tabindex="5" required></textarea>
+            </fieldset>
+            <fieldset>
+              <button ng-disabled="form.$invalid" name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://unpkg.com/angular/angular.min.js"></script>
+    <script src="../../../../dist/touring.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,22 @@
+.demo-bar {
+  background-color: #FAFAFA;
+  color: #FFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, .07);
+  border-bottom: 1px solid rgba(0, 0, 0, .07);
+}
+
+.demo-bar .btn {
+  flex: 1;
+  background-color: #178bf5;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  padding: 4px 8px;
+  text-align: center;
+  cursor: pointer;
+}
