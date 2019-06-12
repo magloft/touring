@@ -1,4 +1,4 @@
-const CARD_WIDTH = 320
+const CARD_WIDTH = 360
 const CARD_MIN_WIDTH = 240
 const EDGE_SPACING = 10
 const CARD_OFFSET = 20

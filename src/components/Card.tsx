@@ -1,7 +1,6 @@
-import { h, Component } from 'preact'
+import { h, Component, Ref } from 'preact'
 import cx from 'classnames'
 import AnimateOnChange from './AnimateOnChange'
-import './Card.scss'
 import Step from '../lib/Step'
 import { calculateLayout, Layout } from '../lib/LayoutHandlers'
 
@@ -25,6 +24,7 @@ interface CardState {
 
 export default class Card extends Component<CardProps, CardState> {
   private arrow: HTMLElement
+  private element: Ref<HTMLElement>
 
   public state = { animate: false }
 
@@ -37,10 +37,7 @@ export default class Card extends Component<CardProps, CardState> {
     super(props)
     this.onAnimationEnd = this.onAnimationEnd.bind(this)
     this.refCallback = this.refCallback.bind(this)
-  }
-
-  getLayout(targetRect, element) {
-    return calculateLayout(this.props.step.positions, targetRect, element.getBoundingClientRect())
+    this.onLayout = this.onLayout.bind(this)
   }
 
   getStyle({ rect }: Layout) {
@@ -67,20 +64,28 @@ export default class Card extends Component<CardProps, CardState> {
 
   private timeout = null
   refCallback(element) {
-    if (element) {
-      if (this.timeout) { clearTimeout(this.timeout) }
-      this.timeout = setTimeout(() => {
-        const { step, rect } = this.props
-        const layout = calculateLayout(step.positions, rect, element.base.getBoundingClientRect())
-        for (const [key, value] of Object.entries(this.getStyle(layout))) {
-          element.base.style[key] = value
-        }
-        for (const [key, value] of Object.entries(this.getArrowStyle(layout))) {
-          this.arrow.style[key] = value
-        }
-        this.arrow.setAttribute('direction', DIRECTION_ARROW_MAP[layout.layouter.direction])
-      }, 10)
+    if (!element) { return }
+    this.element = element
+    if (this.timeout) { clearTimeout(this.timeout) }
+    this.timeout = setTimeout(this.onLayout, 10)
+  }
+
+  onLayout() {
+    const { step, rect } = this.props
+    const { base } = this.element as any
+    if (!base || !this.arrow) { return }
+    const layout = calculateLayout(step.positions, rect, base.getBoundingClientRect())
+    for (const [key, value] of Object.entries(this.getStyle(layout))) {
+      base.style[key] = value
     }
+    for (const [key, value] of Object.entries(this.getArrowStyle(layout))) {
+      this.arrow.style[key] = value
+    }
+    this.arrow.setAttribute('direction', DIRECTION_ARROW_MAP[layout.layouter.direction])
+  }
+
+  componentDidMount() {
+    this.onLayout()
   }
 
   render({ step, active }: CardProps, { animate }: CardState) {
@@ -99,7 +104,7 @@ export default class Card extends Component<CardProps, CardState> {
           <div class='trng-card-header-title'>{step.title}</div>
           <div class='trng-card-header-icon' style={iconStyle} />
         </div>
-        {items.map(item => item.render(step))}
+        {items.map(item => item.render(step, this.onLayout))}
       </AnimateOnChange>
     )
   }

@@ -1,6 +1,5 @@
-import { h, Component, ComponentChild } from 'preact'
+import { h, Component } from 'preact'
 import cx from 'classnames'
-import './Backdrop.scss'
 
 const CLIP_SPACING = 8
 
@@ -28,6 +27,7 @@ export default class Backdrop extends Component<BackdropProps> {
 
   getStyle() {
     const { x, y, width, height } = this.props.rect
+    if (width === 0 && height === 0) { return { clipPath: 'initial' } }
 
     const points = []
     points.push(['0%', '0%'])
@@ -52,28 +52,30 @@ export default class Backdrop extends Component<BackdropProps> {
   }
 
   getClipInfo() {
+    const { x, y, width, height } = this.props.rect
+    const valid = width !== 0 || height !== 0
     const bodyWidth = document.body.offsetWidth
     const bodyHeight = document.body.offsetHeight
-    const { x, y, width, height } = this.props.rect
-    const points = []
-    points.push([x, y + height + CLIP_SPACING])
-    points.push([x - CLIP_SPACING, y + height])
-    points.push([x - CLIP_SPACING, y])
-    points.push([x, y - CLIP_SPACING])
-    points.push([x + width, y - CLIP_SPACING])
-    points.push([x + width + CLIP_SPACING, y])
-    points.push([x + width + CLIP_SPACING, y + height])
-    points.push([x + width, y + height  + CLIP_SPACING])
-    points.push([x, y + height + CLIP_SPACING])
-
+    const points = valid ? [
+      [x, y + height + CLIP_SPACING],
+      [x - CLIP_SPACING, y + height],
+      [x - CLIP_SPACING, y],
+      [x, y - CLIP_SPACING],
+      [x + width, y - CLIP_SPACING],
+      [x + width + CLIP_SPACING, y],
+      [x + width + CLIP_SPACING, y + height],
+      [x + width, y + height  + CLIP_SPACING],
+      [x, y + height + CLIP_SPACING]
+    ] : null
+    const corners = valid ? [
+      { cx: x, cy: y },
+      { cx: x + width, cy: y },
+      { cx: x + width, cy: y + height },
+      { cx: x, cy: y + height }
+    ] : []
     return {
-      corners: [
-        { cx: x, cy: y },
-        { cx: x + width, cy: y },
-        { cx: x + width, cy: y + height },
-        { cx: x, cy: y + height }
-      ],
-      points: points.map((point) => point.join(' ')).join(','),
+      corners,
+      points: points ? points.map((point) => point.join(' ')).join(',') : null,
       width: `${bodyWidth}px`,
       height: `${bodyHeight}px`,
       viewBox: `0 0 ${bodyWidth} ${bodyHeight}`
@@ -86,11 +88,11 @@ export default class Backdrop extends Component<BackdropProps> {
         <defs>
           <mask id='highlight'>
             <rect width='100%' height='100%' fill='white' />
-            <polygon points={points} fill='black' />
-            <circle r='8' cx={corners[0].cx} cy={corners[0].cy} fill='black' />
-            <circle r='8' cx={corners[1].cx} cy={corners[1].cy} fill='black' />
-            <circle r='8' cx={corners[2].cx} cy={corners[2].cy} fill='black' />
-            <circle r='8' cx={corners[3].cx} cy={corners[3].cy} fill='black' />
+            {points && (<polygon points={points} fill='black' />)}
+            {corners[0] && (<circle r='8' cx={corners[0].cx} cy={corners[0].cy} fill='black' />)}
+            {corners[1] && (<circle r='8' cx={corners[1].cx} cy={corners[1].cy} fill='black' />)}
+            {corners[2] && (<circle r='8' cx={corners[2].cx} cy={corners[2].cy} fill='black' />)}
+            {corners[3] && (<circle r='8' cx={corners[3].cx} cy={corners[3].cy} fill='black' />)}
           </mask>
         </defs>
         <rect x='0' y='0' width='100%' height='100%' fill='rgba(0,0,0,0.25)' mask='url(#highlight)' />

@@ -4,7 +4,6 @@ import Step from '../lib/Step'
 import Card from './Card'
 import Backdrop from './Backdrop'
 import PositionObserver from './PositionObserver'
-import './Tour.scss'
 
 export interface TourProps {
   scope: any

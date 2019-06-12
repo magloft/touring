@@ -1,3 +1,36 @@
+.trng-tour {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.trng-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2147483646;
+  pointer-events: none;
+
+  svg {
+    opacity: 0;
+    transition: opacity 500ms;
+    pointer-events: none;
+  }
+
+  &.trng-active {
+    pointer-events: all;
+
+    svg {
+      opacity: 1;
+    }
+  }
+}
+
 .trng-card {
   position: absolute;
   background-color: #FFFFFF;
@@ -5,7 +38,7 @@
   font-size: 13px;
   line-height: 1.5;
   padding: 4px;
-  pointer-events: all;
+  pointer-events: none;
   opacity: 0;
   transition: left 200ms, top 200ms, opacity 330ms;
   z-index: 2147483647;
@@ -35,6 +68,7 @@
   }
 
   .trng-card-item-image {
+    position: relative;
     margin-left: -4px;
     margin-right: -4px;
     text-align: center;
@@ -42,13 +76,51 @@
     justify-content: center;
     background-color: #FAFAFA;
     border-bottom: 1px solid #F5F5F5;
+    background-image: url(./icons/loading.svg);
+    background-position: center center;
+    background-size: 48px;
+    background-repeat: no-repeat;
 
     img {
       width: 100%;
       display: block;
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+
+    &.trng-card-item-image-loaded {
+      background-image: none;
+
+      img {
+        opacity: 1;
+      }
     }
   }
   
+  .trng-card-item-embed {
+    margin-left: -4px;
+    margin-right: -4px;
+  
+    .trng-card-item-embed-wrapper {
+      position: relative;
+      background-color: #FAFAFA;
+      background-image: url(./icons/loading.svg);
+      background-position: center center;
+      background-size: 48px;
+      background-repeat: no-repeat;
+    }
+  
+    .trng-card-item-embed-iframe {
+      max-width: 100%;
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }  
+
   .trng-card-item-paragraph {
     padding: 16px 12px;
   }
@@ -58,18 +130,18 @@
     padding: 6px 8px;
     margin: 8px;
     border: 1px solid #EEE;
-    font-size: 13px;
+    font-size: 12px;
     font-family: monospace;
     white-space: pre;
+    overflow-x: auto;
   }
 
   .trng-card-item-hint {
     color: #178bf4;
     font-weight: 600;
-    padding: 0px 12px 0px 32px;
-    line-height: 36px;
+    padding: 6px 12px 6px 32px;
     border-top: 1px solid #F5F5F5;
-    background-image: url('../icons/hint.svg');
+    background-image: url('./icons/hint.svg');
     background-repeat: no-repeat;
     background-size: 18px;
     background-position: 10px center;

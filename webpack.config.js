@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
     devtool: dev ? 'inline-source-map' : false,
     devServer: { contentBase: './' },
     entry: {
-      touring: './src/index.tsx',
+      touring: './src/touring.js',
       index: './docs/assets/index.js'
     },
     output: {
