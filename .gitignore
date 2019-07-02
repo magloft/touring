@@ -1,2 +1,5 @@
 node_modules/
 yarn-error.log
+dist/
+examples/**/index.js
+examples/**/index.css
