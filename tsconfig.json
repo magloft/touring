@@ -1,19 +1,30 @@
 {
-	"compilerOptions": {
-		"outDir": "./dist",
-		"target": "es5",
-		"moduleResolution": "node",
-		"module": "commonjs",
-		"noImplicitAny": false,
-		"removeComments": true,
-		"sourceMap": true,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es6",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "sourceMap": true,
 		"jsx": "react",
-		"jsxFactory": "h"
-	},
-	"suppressImplicitAnyIndexErrors": true,
-	"lib": ["dom", "es2017"],
-	"baseUrl": ".",
-	"exclude": [
-		"dist"
-	]
+		"jsxFactory": "h",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": ["dist"]
 }

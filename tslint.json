@@ -1,28 +1,33 @@
 {
+	"extends": "tslint:latest",
+	"linterOptions": {
+		"exclude": [
+			"node_modules/**"
+		]
+	},
 	"rules": {
+		"no-this-assignment": false,
+		"trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
 		"class-name": true,
 		"curly": true,
-		"eofline": false,
+		"eofline": true,
 		"forin": true,
-		"indent": [
-			true,
-			"spaces"
-		],
+		"indent": [true, "spaces"],
 		"label-position": true,
-		"max-line-length": [
-			true,
-			180
-		],
+		"max-line-length": [true, 200],
+		"max-classes-per-file": false,
 		"no-arg": true,
 		"no-bitwise": true,
 		"no-construct": true,
+		"no-console": [true, "log"],
 		"no-debugger": true,
 		"no-duplicate-variable": true,
 		"no-empty": true,
 		"no-eval": true,
+		"object-literal-sort-keys": false,
 		"no-string-literal": false,
+		"no-submodule-imports": false,
 		"no-trailing-whitespace": true,
-		"no-unused-variable": false,
 		"one-line": [
 			true,
 			"check-open-brace",

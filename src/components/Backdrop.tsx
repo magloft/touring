@@ -1,35 +1,43 @@
-import { h, Component } from 'preact'
 import cx from 'classnames'
+import { Component, h } from 'preact'
 
 const CLIP_SPACING = 8
 
-export interface BackdropProps {
+export interface IBackdropProps {
   rect?: DOMRect
   active?: boolean
   lock?: boolean
   overlay?: boolean
-  onClick?: (event) => void
+  onClick?: (event: MouseEvent) => void
 }
 
-export default class Backdrop extends Component<BackdropProps> {
-  private onResize: EventListener
-
-  static defaultProps = {
-    rect: {},
+export default class Backdrop extends Component<IBackdropProps> {
+  public static defaultProps: Partial<IBackdropProps> = {
+    rect: new DOMRect(),
     active: false,
     lock: false,
     overlay: true
   }
+  private onResize: EventListener
 
-  componentDidMount() {
+  public componentDidMount() {
     window.addEventListener('resize', this.onResize, true)
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', this.onResize)
   }
 
-  getStyle() {
+  public render({ active, lock, overlay }: IBackdropProps) {
+    const style = this.getStyle()
+    return (
+      <div class={cx('trng-backdrop', { 'trng-active': active, 'trng-lock': lock })} onClick={this.props.onClick} style={style}>
+        {overlay && (this.generateOverlay())}
+      </div>
+    )
+  }
+
+  private getStyle() {
     const { x, y, width, height } = this.props.rect
     if (width === 0 && height === 0) { return { clipPath: 'initial' } }
 
@@ -51,11 +59,11 @@ export default class Backdrop extends Component<BackdropProps> {
     points.push(['100%', '0%'])
     points.push(['0%', '0%'])
 
-    const polygon = points.map(([x, y]) => `${x} ${y}`)
+    const polygon = points.map(([a, b]) => `${a} ${b}`)
     return { clipPath: `polygon(${polygon.join(',')})` }
   }
 
-  getClipInfo() {
+  private getClipInfo() {
     const { x, y, width, height } = this.props.rect
     const valid = width !== 0 || height !== 0
     const containerRect = this.base ? this.base.getBoundingClientRect() : document.body.getBoundingClientRect()
@@ -87,7 +95,7 @@ export default class Backdrop extends Component<BackdropProps> {
     }
   }
 
-  generateOverlay() {
+  private generateOverlay() {
     const { corners, width, height, viewBox, points } = this.getClipInfo()
     return (
       <svg width={width} height={height} viewBox={viewBox}>
@@ -103,15 +111,6 @@ export default class Backdrop extends Component<BackdropProps> {
         </defs>
         <rect x='0' y='0' width='100%' height='100%' fill='rgba(0,0,0,0.25)' mask='url(#highlight)' />
       </svg>
-    )
-  }
-
-  render({ active, lock, overlay }) {
-    const style = this.getStyle()
-    return (
-      <div class={cx('trng-backdrop', { 'trng-active': active, 'trng-lock': lock })} onClick={this.props.onClick} style={style}>
-        {overlay && (this.generateOverlay())}
-      </div>
     )
   }
 }

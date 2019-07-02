@@ -1,50 +1,51 @@
-import { h, Component,  } from 'preact'
 import cx from 'classnames'
-import { IItemProps } from './IItemProps'
+import { h } from 'preact'
+import { IItemProps, ItemTypeComponent } from './IItemType'
 
-interface ItemImageState {
+interface IItemImageState {
   src: string
-  dataSrc: string
+  dataSrc: string | null
   loaded: boolean
 }
 
-
-export default class ItemImage extends Component<IItemProps, ItemImageState> {
-  private element: HTMLElement
-  state = {
+export default class ItemImage extends ItemTypeComponent<IItemProps, IItemImageState> {
+  public state: IItemImageState = {
     src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     dataSrc: null,
     loaded: false
   }
+  private element: HTMLElement | null = null
 
-  inview(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.intersectionRatio) {
-        entry.target.addEventListener('load', this.loading.bind(this))
-        entry.target.src = entry.target.getAttribute('data-src')
-        observer.unobserve(entry.target)
-      }
-    })
-  }
-
-  loading(event) {
-    if (event.target.complete) {
-      this.setState({ loaded: true })
-      if (this.props.onLayout) { this.props.onLayout() }
-    }
-  }
-
-  componentDidMount() {
+  public componentDidMount() {
     this.setState({ dataSrc: this.props.value, loaded: false })
     const observer = new IntersectionObserver(this.inview.bind(this))
     observer.observe(this.element)
   }
 
-  render({}: IItemProps, { loaded, src, dataSrc }: ItemImageState) {
+  public render({}: IItemProps, { loaded, src, dataSrc }: IItemImageState) {
     return (
       <div class={cx('trng-card-item-image', { 'trng-card-item-image-loaded': loaded })}>
         <img src={src} data-src={dataSrc} ref={(element) => { this.element = element }} />
       </div>
     )
+  }
+
+  private inview: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio) {
+        const target = entry.target as HTMLImageElement
+        target.addEventListener('load', this.loading)
+        target.src = target.getAttribute('data-src')
+        observer.unobserve(target)
+      }
+    })
+  }
+
+  private loading = (event: Event) => {
+    const target = event.target as HTMLImageElement
+    if (target.complete) {
+      this.setState({ loaded: true })
+      if (this.props.onLayout) { this.props.onLayout() }
+    }
   }
 }

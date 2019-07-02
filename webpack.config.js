@@ -3,6 +3,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const DtsBundleWebpack = require('dts-bundle-webpack')
 
 module.exports = (env, argv) => {
   const dev = argv.mode !== 'production'
@@ -29,7 +30,10 @@ module.exports = (env, argv) => {
       rules: [
         { test: /\.jsx$/, use: { loader: 'babel-loader', options: {
           presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-transform-runtime', ['@babel/plugin-transform-react-jsx', { pragma: 'h' }]]
+          plugins: [
+            '@babel/plugin-transform-runtime',
+            ['@babel/plugin-transform-react-jsx', { pragma: 'h' }]
+          ]
         } } },
         { test: /\.tsx?$/, use: { loader: 'ts-loader' } },
         { test: /\.scss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
@@ -48,6 +52,12 @@ module.exports = (env, argv) => {
           description: 'touring is a javascript/preact library that allows you to generate both beautiful and powerful product tours with ease.'
         },
         chunks: ['dist/touring', 'dist/index']
+      }),
+      new DtsBundleWebpack({
+        name: 'touring',
+        main: 'dist/index.d.ts',
+        baseDir: 'dist',
+        out: 'touring.d.ts'
       })
     ],
     optimization: {

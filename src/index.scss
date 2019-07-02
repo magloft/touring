@@ -50,6 +50,8 @@ html, body {
   opacity: 0;
   transition: left 200ms, top 200ms, opacity 330ms;
   z-index: 2147483647;
+  overflow-y: auto;
+  max-height: calc(100vh - 20px);
 
   .trng-card-header {
     display: flex;

@@ -1,29 +1,14 @@
+import { ILayout, ILayouter, ILayouterMap, LayoutDirection } from './ILayout'
+
 const CARD_WIDTH = 360
 const CARD_MIN_WIDTH = 240
 const EDGE_SPACING = 10
 const CARD_OFFSET = 20
 const ARROW_WIDTH = 8
 
-export interface Layouter {
-  direction: string
-  matches(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) : boolean
-  calculate(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) : Layout
-}
-
-export interface ArrowOffset {
-  x: number
-  y: number
-}
-
-export interface Layout {
-  rect: DOMRect
-  offset: ArrowOffset
-  layouter: Layouter
-}
-
-export const left: Layouter = {
+export const left: ILayouter = {
   direction: 'left',
-  matches(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) {
+  matches({}: DOMRect, targetRect: DOMRect, {}: DOMRect) {
     return EDGE_SPACING + CARD_MIN_WIDTH < targetRect.x
   },
   calculate(containerRect, targetRect: DOMRect, cardRect: DOMRect) {
@@ -35,9 +20,9 @@ export const left: Layouter = {
   }
 }
 
-export const right: Layouter = {
+export const right: ILayouter = {
   direction: 'right',
-  matches(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) {
+  matches(containerRect: DOMRect, targetRect: DOMRect, {}: DOMRect) {
     return targetRect.x + targetRect.width + CARD_MIN_WIDTH + CARD_OFFSET + EDGE_SPACING < containerRect.width
   },
   calculate(containerRect, targetRect: DOMRect, cardRect: DOMRect) {
@@ -49,9 +34,9 @@ export const right: Layouter = {
   }
 }
 
-export const top: Layouter = {
+export const top: ILayouter = {
   direction: 'top',
-  matches(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) {
+  matches({}: DOMRect, targetRect: DOMRect, cardRect: DOMRect) {
     return EDGE_SPACING + cardRect.height < targetRect.y
   },
   calculate(containerRect, targetRect: DOMRect, cardRect: DOMRect) {
@@ -63,7 +48,7 @@ export const top: Layouter = {
   }
 }
 
-export const bottom: Layouter = {
+export const bottom: ILayouter = {
   direction: 'bottom',
   matches(containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect) {
     return targetRect.y + targetRect.height + cardRect.height + CARD_OFFSET + EDGE_SPACING < containerRect.width
@@ -77,12 +62,12 @@ export const bottom: Layouter = {
   }
 }
 
-export const center: Layouter = {
+export const center: ILayouter = {
   direction: 'center',
   matches() {
     return true
   },
-  calculate(containerRect, targetRect: DOMRect, cardRect: DOMRect) {
+  calculate(containerRect, {}: DOMRect, cardRect: DOMRect) {
     const rect = new DOMRect(0, 0, CARD_WIDTH, cardRect.height)
     rect.x = containerRect.width / 2 - cardRect.width / 2
     rect.y = containerRect.height / 2 - cardRect.height / 2
@@ -91,9 +76,9 @@ export const center: Layouter = {
   }
 }
 
-const layouters = { center, left, right, top, bottom }
+const layouters: ILayouterMap = { center, left, right, top, bottom }
 
-export function calculateLayout(directions, containerRect, targetRect: DOMRect, cardRect: DOMRect) : Layout {
+export function calculateLayout(directions: LayoutDirection[], containerRect: DOMRect, targetRect: DOMRect, cardRect: DOMRect): ILayout {
   if (targetRect.width === 0) { return center.calculate(containerRect, targetRect, cardRect) }
   for (const direction of directions) {
     const layouter = layouters[direction]
@@ -104,7 +89,7 @@ export function calculateLayout(directions, containerRect, targetRect: DOMRect, 
   return center.calculate(containerRect, targetRect, cardRect)
 }
 
-const transformOffset = function(containerRect, rect: DOMRect) {
+const transformOffset = (containerRect: DOMRect, rect: DOMRect) => {
   const offset = { x: 0, y: 0 }
   if (rect.y < EDGE_SPACING) {
     offset.y = rect.y - EDGE_SPACING

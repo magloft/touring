@@ -11,7 +11,7 @@
       ]
     },
     {
-      "id": "intro",
+      "id": "types",
       "icon": "docs/assets/feature.svg",
       "title": "ITEM TYPES",
       "items": [
@@ -23,9 +23,9 @@
       ]
     },
     {
-      "id": "intro",
+      "id": "selector",
       "icon": "docs/assets/feature.svg",
-      "title": "TOURING DEMO",
+      "title": "SELECTORS",
       "items": [
         { "type": "paragraph", "value": "You can use touring to highlight specific elements on a page by providing a selector:" },
         { "type": "code", "value": "{ selector: 'img[alt=\"touring\"]' }" },
@@ -37,9 +37,9 @@
       "listen": ["click"]
     },
     {
-      "id": "heading",
+      "id": "placement",
       "icon": "docs/assets/feature.svg",
-      "title": "SELECTORS",
+      "title": "PLACEMENT",
       "items": [
         { "type": "paragraph", "value": "Touring will always find the best placement on its own. Go ahead and try resizing your browser to see how that works." },
         { "type": "hint", "value": "Resize your browser, and continue by clicking the button below." },
@@ -76,7 +76,7 @@
       "listen": ["click"]
     },
     {
-      "id": "success",
+      "id": "complete",
       "icon": "docs/assets/feature.svg",
       "title": "COMPLETE",
       "items": [

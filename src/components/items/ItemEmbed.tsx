@@ -1,16 +1,16 @@
-import { h, Component } from 'preact'
-import { IItemProps } from './IItemProps'
+import { h } from 'preact'
 import { request } from '../../util/request'
+import { IItemProps, ItemTypeComponent } from './IItemType'
 
-interface ItemEmbedState {
-  url: string
+interface IItemEmbedState {
+  url: string | null
   ratio: number
 }
 
-export default class ItemEmbed extends Component<IItemProps> {
-  state = { url: null, ratio: 270 / 480 }
+export default class ItemEmbed extends ItemTypeComponent<IItemProps, IItemEmbedState> {
+  public state: IItemEmbedState = { url: null, ratio: 270 / 480 }
 
-  componentDidMount() {
+  public componentDidMount() {
     const { props } = this
     const { value } = props
     request(`https://noembed.com/embed?url=${encodeURIComponent(value)}`).then(({ url, width, height }) => {
@@ -19,7 +19,7 @@ export default class ItemEmbed extends Component<IItemProps> {
     })
   }
 
-  render({}: IItemProps, { url, ratio }:ItemEmbedState) {
+  public render({}: IItemProps, { url, ratio }: IItemEmbedState) {
     const style = {
       paddingTop: `${ratio * 100}%`
     }

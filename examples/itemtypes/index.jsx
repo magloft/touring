@@ -1,4 +1,4 @@
-const { h, Component } = require('preact')
+const { Component } = require('preact')
 import touring from '../../src/index'
 import '../shared/examples.css'
 import './index.scss'
