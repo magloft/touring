@@ -67,7 +67,9 @@ export default class Card extends Animatable<ICardProps, IAnimatableState> {
           <div class='trng-card-header-title'>{title}</div>
           {icon && <div class='trng-card-header-icon' style={{ backgroundImage: `url(${icon})` }} />}
         </div>
-        {items.map((item) => item.render(handleEvent, valid, this.updateLayout))}
+        <div class='trng-card-items'>
+          {items.map((item) => item.render(handleEvent, valid, this.updateLayout))}
+        </div>
       </div>
     )
   }

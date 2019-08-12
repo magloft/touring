@@ -50,7 +50,8 @@ html, body {
   opacity: 0;
   transition: left 200ms, top 200ms, opacity 330ms;
   z-index: 2147483647;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   max-height: calc(100vh - 20px);
 
   .trng-card-header {
@@ -75,6 +76,10 @@ html, body {
       background-repeat: no-repeat;
       margin-left: 4px;
     }
+  }
+
+  .trng-card-items {
+    overflow-y: auto;
   }
 
   .trng-card-item-image {
