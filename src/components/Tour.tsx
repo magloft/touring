@@ -21,6 +21,7 @@ export default class Tour extends Component<ITourProps, ITourState> {
   public static defaultProps: ITourProps = { context: window, steps: [] }
   private interval: number
   private card: Card
+  private tourResolve: (value?: unknown) => void
 
   constructor(props: ITourProps) {
     super(props)
@@ -35,7 +36,10 @@ export default class Tour extends Component<ITourProps, ITourState> {
   }
 
   public start() {
-    this.continue(true)
+    return new Promise((resolve) => {
+      this.tourResolve = resolve
+      this.continue(true)
+    })
   }
 
   public continue(first = false) {
@@ -58,7 +62,12 @@ export default class Tour extends Component<ITourProps, ITourState> {
   }
 
   public end() {
-    this.setState({ active: false, step: null })
+    this.setState({ active: false, step: null }, () => {
+      if (this.tourResolve) {
+        this.tourResolve()
+        this.tourResolve = null
+      }
+    })
   }
 
   public validate() {
