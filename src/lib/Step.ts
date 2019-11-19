@@ -16,6 +16,7 @@ export default class Step {
   public readonly overlay: boolean = true
   public readonly autoadvance: boolean = false
   public readonly listen: string[] = []
+  public readonly preventSelector: string | null = null
   public readonly trigger: string[] = []
   public readonly positions: LayoutDirection[] = ['left', 'right', 'bottom', 'top']
   public readonly condition: string | null = null
@@ -50,6 +51,17 @@ export default class Step {
           element.dispatchEvent(event)
         }
       }
+    }
+
+    if(this.preventSelector){
+      const elements = document.querySelectorAll(this.preventSelector)
+      Array.from(elements).forEach(el => {
+        el.addEventListener("click", (e) => {
+          e.stopImmediatePropagation()
+          e.stopPropagation()
+          e.preventDefault()
+        }, true)
+      })
     }
   }
 
